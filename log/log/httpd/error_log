@@ -1,0 +1,5 @@
+[Sat Jun 14 02:12:05 2014] [notice] suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.69 for ServerName
+[Sat Jun 14 02:12:05 2014] [notice] Digest: generating secret for digest authentication ...
+[Sat Jun 14 02:12:05 2014] [notice] Digest: done
+[Sat Jun 14 02:12:05 2014] [notice] Apache/2.2.15 (Unix) DAV/2 PHP/5.3.3 configured -- resuming normal operations
