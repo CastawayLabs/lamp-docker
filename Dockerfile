@@ -7,12 +7,13 @@ RUN yum install -y httpd php php-mysql php-pecl php-pear php-pdo php-xml curl gi
 
 EXPOSE 80
 
-ADD www/ /var/www/
-#ADD conf/supervisord.conf /etc/supervisord.conf
-ADD conf/httpd.conf /etc/httpd/conf.d/website.conf
+ADD conf/website.conf /etc/httpd/conf.d/website.conf
+ADD conf/httpd.conf /etc/httpd/conf/httpd.conf
 
 RUN rm -f /etc/httpd/conf.d/welcome.conf
 RUN apachectl configtest
+
+RUN rm -rf /var/www
 
 RUN service httpd stop
 
