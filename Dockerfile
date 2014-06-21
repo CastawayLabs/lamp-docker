@@ -9,6 +9,7 @@ EXPOSE 80
 
 ADD conf/website.conf /etc/httpd/conf.d/website.conf
 ADD conf/httpd.conf /etc/httpd/conf/httpd.conf
+RUN sed -i "s/short_open_tag = .*/short_open_tag = On/" /etc/php.ini
 
 RUN rm -f /etc/httpd/conf.d/welcome.conf
 RUN apachectl configtest
