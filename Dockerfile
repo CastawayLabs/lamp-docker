@@ -11,6 +11,11 @@ EXPOSE 80
 ADD conf/website.conf /etc/httpd/conf.d/website.conf
 ADD conf/httpd.conf /etc/httpd/conf/httpd.conf
 ADD conf/php.ini /etc/php.ini
+ADD conf/postfix.cf /etc/postfix/main.cf
+ADD conf/sasl_passwd /etc/postfix/sasl_passwd
+
+RUN chmod 600 /etc/postfix/sasl_passwd
+RUN postmap /etc/postfix/sasl_passwd
 
 RUN rm -f /etc/httpd/conf.d/welcome.conf
 RUN apachectl configtest
