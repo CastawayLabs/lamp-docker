@@ -1,6 +1,7 @@
 #!/bin/bash
 
-if [! -z "$MANDRILL_PWD" ]; then
+if env | grep -q ^MANDRILL_PWD=
+then
   echo "Using Mandrill Password. <= Written to /etc/postfix/sasl_passwd"
   
   echo "[smtp.mandrillapp.com]:587 $MANDRILL_PWD" > /etc/postfix/sasl_passwd
@@ -9,4 +10,4 @@ if [! -z "$MANDRILL_PWD" ]; then
   postmap /etc/postfix/sasl_passwd
 fi
 
-/usr/sbin/supervisord
+/usr/bin/supervisord
