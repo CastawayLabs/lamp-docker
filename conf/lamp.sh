@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ![ -z "$MANDRILL_PWD" ]; then
+if [! -z "$MANDRILL_PWD" ]; then
   echo "Using Mandrill Password. <= Written to /etc/postfix/sasl_passwd"
   
   echo "[smtp.mandrillapp.com]:587 $MANDRILL_PWD" > /etc/postfix/sasl_passwd
@@ -10,6 +10,5 @@ if ![ -z "$MANDRILL_PWD" ]; then
 fi
 
 /etc/init.d/rsyslog start
-#/etc/init.d/syslog-ng start
 /usr/sbin/postfix -c /etc/postfix start
 source /etc/apache2/envvars && exec /usr/sbin/apache2 -D FOREGROUND
