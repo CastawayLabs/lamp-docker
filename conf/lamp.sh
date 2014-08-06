@@ -9,6 +9,4 @@ if [! -z "$MANDRILL_PWD" ]; then
   postmap /etc/postfix/sasl_passwd
 fi
 
-/etc/init.d/rsyslog start
-/usr/sbin/postfix -c /etc/postfix start
-source /etc/apache2/envvars && exec /usr/sbin/apache2 -D FOREGROUND
+/usr/sbin/supervisord
