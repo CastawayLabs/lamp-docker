@@ -1,29 +1,37 @@
-FROM centos:latest
+FROM phusion/baseimage
 MAINTAINER Matej Kramny <matej@matej.me>
 
-RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-RUN yum update -y
-RUN yum install -y httpd php php-mysql php-pecl php-pear php-pdo php-xml php-odbc mysql curl git postfix cyrus-sasl-plain
+RUN apt-get update
+RUN apt-get install -y apache2 php-pear php5-curl php5-mysql php5-odbc php5-imagick php5-mcrypt mysql-client curl git postfix libsasl2-modules rsyslog python-setuptools libapache2-mod-php5
+RUN apt-get install -y syslog-ng
 RUN pear install Mail Mail_Mime Net_SMTP Net_Socket Spreadsheet_Excel_Writer XML_RPC
 
-EXPOSE 80
+RUN a2enmod rewrite
+RUN a2enmod php5
 
-ADD conf/website.conf /etc/httpd/conf.d/website.conf
-ADD conf/httpd.conf /etc/httpd/conf/httpd.conf
-ADD conf/php.ini /etc/php.ini
+RUN rm -f /etc/apache2/sites-enabled/000-default.conf
+
+ADD conf/website.conf /etc/apache2/conf.d/website.conf
+ADD conf/httpd.conf /etc/apache2/apache2.conf
+ADD conf/php.ini /etc/php5/apache2/php.ini
 ADD conf/postfix.cf /etc/postfix/main.cf
 ADD conf/sasl_passwd /etc/postfix/sasl_passwd
 
+RUN mkdir -p /etc/service/lamp
+ADD conf/lamp.sh /etc/service/lamp/run
+RUN chmod +x /etc/service/lamp/run
+
+RUN chown -R postfix:postfix /etc/postfix
 RUN chmod 600 /etc/postfix/sasl_passwd
 RUN postmap /etc/postfix/sasl_passwd
 
-RUN rm -f /etc/httpd/conf.d/welcome.conf
 RUN apachectl configtest
-
 RUN rm -rf /var/www
 
-RUN service httpd stop
+RUN service apache2 stop
+RUN service postfix stop
 
-RUN source /etc/sysconfig/httpd
-ENTRYPOINT ["/usr/sbin/httpd"]
-CMD ["-D", "FOREGROUND"]
+EXPOSE 80
+EXPOSE 443
+
+CMD ["/sbin/my_init"]
