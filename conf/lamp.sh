@@ -12,4 +12,11 @@ then
   postmap /etc/postfix/sasl_passwd
 fi
 
+if [ ! -z "$RSYSLOG" ]
+then
+  echo "Adding RSYSLOGD configuration"
+  
+  echo "$RSYSLOG" >> /etc/rsyslog.conf
+fi
+
 /usr/bin/supervisord
