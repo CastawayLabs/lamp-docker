@@ -1,25 +1,20 @@
-queue_directory = /var/spool/postfix
-command_directory = /usr/sbin
-daemon_directory = /usr/libexec/postfix
-data_directory = /var/lib/postfix
 mail_owner = postfix
 unknown_local_recipient_reject_code = 550
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 debug_peer_level = 2
-debugger_command =
-	 PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
-	 ddd $daemon_directory/$process_name $process_id & sleep 5
-sendmail_path = /usr/sbin/sendmail.postfix
-newaliases_path = /usr/bin/newaliases.postfix
-mailq_path = /usr/bin/mailq.postfix
 setgid_group = postdrop
 html_directory = no
-manpage_directory = /usr/share/man
 
-myhostname = EDIT_THIS
-mydomain = EDIT_THIS
-myorigin = /etc/mailname
+smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+smtpd_use_tls=yes
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+
+myhostname = localhost
+mydomain = localhost
+myorigin = localhost
 mydestination = localhost
 relayhost = [smtp.mandrillapp.com]:587
 mynetworks_style = host
@@ -27,6 +22,7 @@ mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = all
 home_mailbox = Maildir/
+inet_protocols=ipv4
 
 smtpd_banner = $myhostname ESMTP $mail_name (CentOS)
 biff = no
