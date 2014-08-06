@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cp /etc/resolv.conf /var/spool/postfix/etc/
+
 if [ ! -z "$MANDRILL_PWD" ]
 then
   echo "Using Mandrill Password. <= Written to /etc/postfix/sasl_passwd"
