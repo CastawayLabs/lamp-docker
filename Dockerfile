@@ -20,6 +20,7 @@ ADD conf/httpd.conf /etc/apache2/apache2.conf
 ADD conf/php.ini /etc/php5/apache2/php.ini
 ADD conf/postfix.cf /etc/postfix/main.cf
 ADD conf/sasl_passwd /etc/postfix/sasl_passwd
+ADD conf/rsyslog.conf /etc/rsyslog.conf
 ADD conf/lamp.sh /etc/lamp.sh
 
 RUN chmod +x /etc/lamp.sh
