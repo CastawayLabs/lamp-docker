@@ -26,9 +26,12 @@ ADD conf/lamp.sh /etc/lamp.sh
 
 RUN chmod +x /etc/lamp.sh
 
-RUN chown -R postfix:postfix /etc/postfix
+RUN chown -R root:root /etc/postfix
 RUN chmod 600 /etc/postfix/sasl_passwd
 RUN postmap /etc/postfix/sasl_passwd
+# Maybe a fix for some errors..
+RUN chmod o+rwx /var/spool/postfix/maildrop
+RUN chmod o+x /var/spool/postfix/public
 
 RUN apachectl configtest
 RUN rm -rf /var/www
