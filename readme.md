@@ -55,7 +55,11 @@ Logging
 
 An interesting topic with docker, we've solved it by sending the log files to [papertrail](papertrailapp.com). Setting a hostname will ensure you know which log container to look at when required, and not having to dig around with `docker cp` etc.
 
+Set this environment variable to enable logging:
+- `RSYSLOG=*.* @logs2.papertrailapp.com:12345`
+
 Tips and tricks
 ---------------
 
 - Export log files from docker: `docker cp domain.com:/var/log domain.com_logs`
+- Look for messages at boot for diagnostics. It will say something about mandrill if its enabled, and something about RSYSLOG when you enable logging.
