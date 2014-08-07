@@ -3,7 +3,7 @@ MAINTAINER Matej Kramny <matej@matej.me>
 
 RUN apt-get update
 RUN apt-get install -y apache2 php-pear php5-curl php5-mysql php5-odbc php5-imagick php5-mcrypt mysql-client curl git postfix libsasl2-modules rsyslog python-setuptools libapache2-mod-php5
-RUN apt-get install -y imagemagick php5-imagick
+RUN apt-get install -y imagemagick php5-imagick php5-gd
 RUN pear install Mail Mail_Mime Net_SMTP Net_Socket Spreadsheet_Excel_Writer XML_RPC
 RUN php5enmod mcrypt
 
