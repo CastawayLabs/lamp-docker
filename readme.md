@@ -15,7 +15,7 @@ This is not in the docker registry yet..
  - Nginx routing host:80 to a port opened by docker (see below)
 3. Run the docker image
  - If you have a mysql instance running, and want to link it to the container, see section below.
- - `docker run -d --name "domain.com" -p 8080:80 -v /home/websites/domain.com:/var/www CastawayLabs/lamp-docker`
+ - `docker run -d --name "domain.com" --hostname "domain.com" -p 8080:80 -v /home/websites/domain.com:/var/www CastawayLabs/lamp-docker`
 
 Linking MySQL
 -------------
@@ -41,6 +41,19 @@ $db_pass = getenv('DB_PASS');
 $db_user = getenv('DB_USER');
 $db_host = getenv('DB_PORT_3306_TCP_ADDR');
 ```
+
+Sending Email
+-------------
+
+This image is configured to relay mail through mandrill. _(contribute to add other mail relays)._
+
+Add the following environment variables when starting the image:
+- `MANDRILL_PWD=you@domain.com:myAPIPasswordGeneratedFromMandrillapp.com`
+
+Logging
+-------
+
+An interesting topic with docker, we've solved it by sending the log files to [papertrail](papertrailapp.com). Setting a hostname will ensure you know which log container to look at when required, and not having to dig around with `docker cp` etc.
 
 Tips and tricks
 ---------------
