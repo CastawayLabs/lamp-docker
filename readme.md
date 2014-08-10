@@ -10,14 +10,18 @@ Available in the docker registry under `castawaylabs/lamp-docker`
 Manual build:
 
 1. `docker build -t CastawayLabs/lamp-docker git://github.com/CastawayLabs/lamp-docker.git`
-2. Make directories for your website files. We use the following setup:
+
+Usage:
+
+1. Make directories for your website files. We use the following setup:
  - `mkdir -p /home/websites/domain.com`
  - `chmod 750 /home/websites`
  - `chown root:root /home/websites`
  - Nginx routing host:80 to a port opened by docker (see below)
-3. Run the docker image
+2. Run the docker image
  - If you have a mysql instance running, and want to link it to the container, see section below.
  - `docker run -d --name "domain.com" --hostname "domain.com" -p 8080:80 -v /home/websites/domain.com:/var/www CastawayLabs/lamp-docker`
+3. There is no step 3. See below for additional configuration
 
 Linking MySQL
 -------------
