@@ -5,7 +5,9 @@ LAMP on Docker
 How to use
 ----------
 
-This is not in the docker registry yet..
+Available in the docker registry under `castawaylabs/lamp`
+
+Manual build:
 
 1. `docker build -t CastawayLabs/lamp-docker git://github.com/CastawayLabs/lamp-docker.git`
 2. Make directories for your website files. We use the following setup:
