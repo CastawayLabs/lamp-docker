@@ -5,7 +5,7 @@ LAMP on Docker
 How to use
 ----------
 
-Available in the docker registry under `castawaylabs/lamp`
+Available in the docker registry under `castawaylabs/lamp-docker`
 
 Manual build:
 
