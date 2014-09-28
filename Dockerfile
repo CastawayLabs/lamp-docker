@@ -33,6 +33,10 @@ RUN postmap /etc/postfix/sasl_passwd
 RUN chmod o+rwx /var/spool/postfix/maildrop
 RUN chmod o+x /var/spool/postfix/public
 
+# Fix session write warnings
+RUN chown www-data:www-data /var/lib/php5
+RUN chmod g+rwx /var/lib/php5
+
 RUN apachectl configtest
 RUN rm -rf /var/www
 
